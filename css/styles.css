@@ -10842,12 +10842,14 @@ section {
 }
 
 .header-background {
-  background-image: url('assets/unsplash-image-qg1wMG8xOHs.jpg');
-  background-size: contain;
+  background-image: url('../assets/unsplash-image-qg1wMG8xOHs.jpg'); /* Adjusted path */
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 400px;
   width: 100%;
-  background-color: #E0FACE; /* Example: A light pastel color that matches your site's color scheme */
 }
+
+
+
 
