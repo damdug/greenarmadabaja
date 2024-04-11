@@ -2946,20 +2946,23 @@ textarea.form-control-lg {
 }
 
 .btn-light {
-  --bs-btn-color: #000;
-  --bs-btn-bg: #f8f9fa;
-  --bs-btn-border-color: #f8f9fa;
-  --bs-btn-hover-color: #000;
-  --bs-btn-hover-bg: #d3d4d5;
-  --bs-btn-hover-border-color: #c6c7c8;
-  --bs-btn-focus-shadow-rgb: 211, 212, 213;
-  --bs-btn-active-color: #000;
-  --bs-btn-active-bg: #c6c7c8;
-  --bs-btn-active-border-color: #babbbc;
-  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #000;
-  --bs-btn-disabled-bg: #f8f9fa;
-  --bs-btn-disabled-border-color: #f8f9fa;
+  --bs-btn-color: #fff; /* Text color - using white for better contrast */
+  --bs-btn-bg: #5EC847; /* Background color */
+  --bs-btn-border-color: #4CAF50; /* Slightly darker border color for depth */
+
+  --bs-btn-hover-color: #fff; /* Text color on hover - white for consistency */
+  --bs-btn-hover-bg: #4CAF50; /* Slightly darker background on hover */
+  --bs-btn-hover-border-color: #3C8C41; /* Even darker border on hover for a "deeper" effect */
+
+  --bs-btn-focus-shadow-rgb: 72, 180, 97; /* Adjust the shadow color used for focus */
+  --bs-btn-active-color: #fff; /* Text color when active */
+  --bs-btn-active-bg: #367A38; /* Darker green when the button is active */
+  --bs-btn-active-border-color: #2E6930; /* Even darker border when the button is active */
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); /* Inset shadow for a pressed effect */
+
+  --bs-btn-disabled-color: #ccc; /* Disabled text color - lighter for visual 'disabled' cue */
+  --bs-btn-disabled-bg: #8DB58F; /* Disabled background - lighter green */
+  --bs-btn-disabled-border-color: #8DB58F; /* Matching border color for disabled state */
 }
 
 .btn-dark {
@@ -10837,3 +10840,14 @@ section {
   padding-top: 9rem;
   padding-bottom: 9rem;
 }
+
+.header-background {
+  background-image: url('assets/unsplash-image-qg1wMG8xOHs.jpg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 400px;
+  width: 100%;
+  background-color: #E0FACE; /* Example: A light pastel color that matches your site's color scheme */
+}
+
