@@ -10850,6 +10850,18 @@ section {
   width: 100%;
 }
 
+.navbar-nav .nav-link img {
+  height: 30px;  /* Controls the size of the icons */
+  vertical-align: middle;  /* Aligns icons vertically center in the line */
+  margin-right: 10px;  /* Adds spacing to the right of the icons */
+}
+
+.navbar-nav .nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 
 
