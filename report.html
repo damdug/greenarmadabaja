@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report Issue - Green Armada Baja</title>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+  <style>
+    #map {
+      height: 500px;
+      width: 100%;
+    }
+    #report-section {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Report an Issue</h1>
+
+  <!-- User input form -->
+  <div id="user-input">
+    <input type="text" id="name" placeholder="Enter your name" required>
+    <input type="email" id="email" placeholder="Enter your email" required>
+    <button onclick="saveUserInfo()">Save Info</button>
+  </div>
+
+  <!-- Report section -->
+  <div id="report-section">
+    <input id="autocomplete" placeholder="Enter your location" type="text"></input>
+    <button onclick="reportIssue('pothole')">🕳️ Pothole</button>
+    <button onclick="reportIssue('illegal_dumping')">🚮 Illegal Dumping</button>
+    <button onclick="reportIssue('stray_dog')">🐕 Stray Dog</button>
+    <div id="map"></div>
+    <div id="messages"></div>
+  </div>
+
+  <script>
+    const BACKEND_URL = 'http://localhost:3000';
+
+    let map;
+    let markers = [];
+    let autocomplete;
+    let selectedPlace;
+    let currentUser = null;
+
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
+      });
+
+      initAutocomplete();
+      loadMarkers();
+    }
+
+    function initAutocomplete() {
+      autocomplete = new google.maps.places.Autocomplete(
+        document.getElementById('autocomplete'),
+        { types: ['geocode'] }
+      );
+
+      autocomplete.addListener('place_changed', () => {
+        selectedPlace = autocomplete.getPlace();
+      });
+    }
+
+    async function loadMarkers() {
+      const response = await fetch(`${BACKEND_URL}/get-issues`);
+      const data = await response.json();
+
+      if (response.ok) {
+        data.forEach(issue => {
+          addMarker(issue);
+        });
+      } else {
+        console.error('Error loading markers:', data.error);
+      }
+    }
+
+    function addMarker(issue) {
+      const emoji = getEmoji(issue.issue_type);
+      const marker = new google.maps.Marker({
+        position: { lat: issue.location.coordinates[1], lng: issue.location.coordinates[0] },
+        map: map,
+        label: emoji,
+      });
+      markers.push(marker);
+    }
+
+    function getEmoji(issueType) {
+      switch (issueType) {
+        case 'pothole':
+          return '🕳️';
+        case 'illegal_dumping':
+          return '🚮';
+        case 'stray_dog':
+          return '🐕';
+        default:
+          return '❓';
+      }
+    }
+
+    function reportIssue(issueType) {
+      if (selectedPlace) {
+        const latitude = selectedPlace.geometry.location.lat();
+        const longitude = selectedPlace.geometry.location.lng();
+        saveIssue(issueType, latitude, longitude);
+      } else {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          saveIssue(issueType, latitude, longitude);
+        });
+      }
+    }
+
+    async function saveIssue(issueType, latitude, longitude) {
+      const response = await fetch(`${BACKEND_URL}/save-issue`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          userId: currentUser.id,
+          issueType,
+          latitude,
+          longitude
+        })
+      });
+      const data = await response.json();
+
+      if (response.ok) {
+        const messagesDiv = document.getElementById('messages');
+        const message = document.createElement('div');
+        message.textContent = `Issue reported: ${issueType} at (${latitude}, ${longitude})`;
+        messagesDiv.appendChild(message);
+      } else {
+        console.error('Error reporting issue:', data.error);
+      }
+    }
+
+    async function saveUserInfo() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+
+      if (!name || !email) {
+        alert('Please enter both name and email');
+        return;
+      }
+
+      const response = await fetch(`${BACKEND_URL}/save-user-info`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, email })
+      });
+      const data = await response.json();
+
+      if (response.ok) {
+        currentUser = data;
+        document.getElementById('user-input').style.display = 'none';
+        document.getElementById('report-section').style.display = 'block';
+        initMap();
+      } else {
+        console.error('Error saving user info:', data.error);
+      }
+    }
+
+    window.onload = initMap;
+  </script>
+</body>
+</html>
