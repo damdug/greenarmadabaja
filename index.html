@@ -159,10 +159,17 @@
         <!-- Footer-->
         <footer class="py-5" style="background-color: #E0FACE;">
             <div class="container px-4">
-                <p class="m-0 text-center text-black">Copyright &copy; Green Armada Baja 2023 - 2024</p>
+                <p class="m-0 text-center text-black">Copyright &copy; Green Armada Baja 2023 - <span id="current-year"></span></p>
             </div>
         </footer>
+        
         <script src="js/scripts.js"></script>
         <script src="js/signup.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const currentYear = new Date().getFullYear();
+                document.getElementById('current-year').textContent = currentYear;
+            });
+        </script>
     </body>
 </html>

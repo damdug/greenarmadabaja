@@ -1,17 +1,15 @@
 {
-  "name": "greenarmadabaja.github.io",
+  "name": "greenarmadabaja",
   "version": "1.0.0",
-  "description": "",
+  "description": "Green Armada Baja project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "@supabase/supabase-js": "^2.43.4",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2"
+    "body-parser": "^1.19.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "@supabase/supabase-js": "^1.28.5"
   }
 }
