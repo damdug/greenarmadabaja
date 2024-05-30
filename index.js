@@ -1,37 +1,37 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const { createClient } = require('@supabase/supabase-js');
-const dotenv = require('dotenv');
-
-dotenv.config();
+require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
-app.use(express.json());
+app.use(bodyParser.json());
+app.use(express.static('public'));
 
-app.post('/save-user-info', async (req, res) => {
+app.post('/api/signup', async (req, res) => {
   const { name, email } = req.body;
-  const { data, error } = await supabase.from('users').insert([{ name, email }]);
 
-  if (error) {
-    res.status(500).json({ error: error.message });
-  } else {
-    res.status(200).json(data[0]);
+  if (!name || !email) {
+    return res.status(400).json({ error: 'Name and email are required' });
   }
-});
 
-app.post('/save-issue', async (req, res) => {
-  const { userId, issueType, latitude, longitude } = req.body;
-  const { data, error } = await supabase.from('issues').insert([
-    { user_id: userId, issue_type: issueType, location: `SRID=4326;POINT(${longitude} ${latitude})` }
-  ]);
+  try {
+    const { data, error } = await supabase
+      .from('users')
+      .insert([{ name, email }]);
 
-  if (error) {
+    if (error) {
+      throw error;
+    }
+
+    res.status(200).json({ message: 'User signed up successfully', data });
+  } catch (error) {
     res.status(500).json({ error: error.message });
-  } else {
-    res.status(200).json(data[0]);
   }
 });
 

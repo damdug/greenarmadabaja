@@ -10,26 +10,8 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
     </head>
-    <!-- Navigation-->
-    <header class="text-white text-center header-background">
-        <div class="container px-4 my-5">
-            <h1 class="fw-bolder">Join the Green Armada!</h1>
-            <br>
-            <br>
-            <p class="lead">We are a project-driven, action-based group of individuals and organizations working together for greener communities.</p>
-            <br>
-            <br>
-            <br>
-            <a class="btn btn-lg btn-light" href="https://ko-fi.com/greenarmadabaja" target="_blank">JOIN NOW!</a>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <p class="lead">“It is our collective and individual responsibility to preserve and tend to the environment in which we all live.” ― Dalai Lama</p>
-        </div>            
-    </header>    
     <body id="page-top">
+        <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav" style="background-color: #E0FACE;">
             <div class="container px-4">
                 <a class="navbar-brand" href="#page-top">
@@ -55,11 +37,11 @@
                                 <img src="assets/twitter-x.svg" alt="Twitter" style="height: 30px;">
                             </a>
                         </li>
-                        **<li class="nav-item">
-                            <a class="nav-link" href="report.html">Report</a>
-                        </li>**
                         <li class="nav-item">
-                            <a class="nav-link active" href="#page-top">About</a>
+                            <a class="nav-link active" href="javascript:void(0);" onclick="showJoinForm()">Join</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#mission">Our Mission</a>
@@ -74,22 +56,33 @@
                 </div>
             </div>
         </nav>
-    
+
         <!-- Header-->
-            
+        <header class="text-white text-center header-background">
+            <div class="container px-4 my-5">
+                <h1 class="fw-bolder">Join the Green Armada!</h1>
+                <br><br>
+                <p class="lead">We are a project-driven, action-based group of individuals and organizations working together for greener communities.</p>
+                <br><br><br>
+                <a class="btn btn-lg btn-light" href="https://ko-fi.com/greenarmadabaja" target="_blank">JOIN NOW!</a>
+                <br><br><br><br><br>
+                <p class="lead">“It is our collective and individual responsibility to preserve and tend to the environment in which we all live.” ― Dalai Lama</p>
+            </div>            
+        </header> 
+
         <!-- About section-->
         <section id="about">
             <div class="container px-4">
                 <div class="row gx-4 justify-content-center">
                     <div class="col-lg-8">
                         <h2>About</h2>
-                        <p class="lead">Our efforts focus on both practical solutions, such as adding trash cans to public spaces and hosting community cleanup events, and raising awareness about the harmful effects of litter on our communities and the environment. By advocating the importance of proper waste disposal and empowering the people to take action, we aim to create a culture of accountability and responsibility.
-
-                            We are proud to call El Sauzal de Rodriguez home, where the Valle de Guadalupe meets the sea just north of Ensenada in Baja California. We are taking action and accountability for our neighborhoods and the world beyond. Our mission is to raise awareness and drive change at the grassroots level by promoting responsible waste disposal and clean public spaces. We believe that by taking responsibility for our own actions and spreading awareness, we can create a cleaner and more sustainable future for all.</p>
+                        <p class="lead">Our efforts focus on both practical solutions, such as adding trash cans to public spaces and hosting community cleanup events, and raising awareness about the harmful effects of litter on our communities and the environment. By advocating the importance of proper waste disposal and empowering the people to take action, we aim to create a culture of accountability and responsibility.</p>
+                        <p class="lead">We are proud to call El Sauzal de Rodriguez home, where the Valle de Guadalupe meets the sea just north of Ensenada in Baja California. We are taking action and accountability for our neighborhoods and the world beyond. Our mission is to raise awareness and drive change at the grassroots level by promoting responsible waste disposal and clean public spaces. We believe that by taking responsibility for our own actions and spreading awareness, we can create a cleaner and more sustainable future for all.</p>
                     </div>
                 </div>
             </div>
         </section>
+
         <!-- Mission section-->
         <section class="bg-light" id="mission">
             <div class="container px-4">
@@ -107,9 +100,8 @@
                 </div>
             </div>
         </section>
-        
-</section>
-        <!-- get Involved section-->
+
+        <!-- Get Involved section-->
         <section id="getinvolved">
             <div class="container px-4">
                 <div class="row gx-4 justify-content-center">
@@ -133,7 +125,25 @@
                 </div>
             </div>
         </section>
-        
+
+        <!-- Join section -->
+        <section id="join">
+            <div class="container px-4">
+                <div id="join-form-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeJoinForm()">&times;</span>
+                        <h2>Join the Green Armada</h2>
+                        <form id="signup-form">
+                            <input type="text" id="name" placeholder="Enter your name" required>
+                            <input type="email" id="email" placeholder="Enter your email" required>
+                            <button type="submit">Sign Up</button>
+                        </form>
+                        <div id="message"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Contact section-->
         <section class="bg-light" id="contact">
             <div class="container px-4">
@@ -145,12 +155,14 @@
                 </div>
             </div>
         </section>
+        
         <!-- Footer-->
         <footer class="py-5" style="background-color: #E0FACE;">
             <div class="container px-4">
                 <p class="m-0 text-center text-black">Copyright &copy; Green Armada Baja 2023 - 2024</p>
             </div>
         </footer>
-      
+        <script src="js/scripts.js"></script>
+        <script src="js/signup.js"></script>
     </body>
 </html>

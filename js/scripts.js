@@ -1,34 +1,38 @@
-/*!
-* Start Bootstrap - Scrolling Nav v5.0.6 (https://startbootstrap.com/template/scrolling-nav)
-* Copyright 2013-2023 Start Bootstrap
-* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-scrolling-nav/blob/master/LICENSE)
-*/
-//
-// Scripts
-// 
+// scripts.js
 
-window.addEventListener('DOMContentLoaded', event => {
-
-    // Activate Bootstrap scrollspy on the main nav element
-    const mainNav = document.body.querySelector('#mainNav');
-    if (mainNav) {
-        new bootstrap.ScrollSpy(document.body, {
-            target: '#mainNav',
-            rootMargin: '0px 0px -40%',
-        });
-    };
-
-    // Collapse responsive navbar when toggler is visible
-    const navbarToggler = document.body.querySelector('.navbar-toggler');
-    const responsiveNavItems = [].slice.call(
-        document.querySelectorAll('#navbarResponsive .nav-link')
-    );
-    responsiveNavItems.map(function (responsiveNavItem) {
-        responsiveNavItem.addEventListener('click', () => {
-            if (window.getComputedStyle(navbarToggler).display !== 'none') {
-                navbarToggler.click();
-            }
-        });
-    });
-
-});
+// Function to show the join form modal
+function showJoinForm() {
+    const modal = document.getElementById('join-form-modal');
+    if (modal) {
+      modal.style.display = 'block';
+    } else {
+      console.error('Modal element not found');
+    }
+  }
+  
+  // Function to hide the join form modal
+  function closeJoinForm() {
+    const modal = document.getElementById('join-form-modal');
+    if (modal) {
+      modal.style.display = 'none';
+    } else {
+      console.error('Modal element not found');
+    }
+  }
+  
+  // Event listener to close the modal when clicking outside of it
+  window.onclick = function(event) {
+    const modal = document.getElementById('join-form-modal');
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  }
+  
+  // DOMContentLoaded event listener to ensure the DOM is fully loaded before running scripts
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('Scripts.js loaded');
+    
+    // Other custom scripts can be added here
+    // Example: Initialize other components or add event listeners
+  });
+  
