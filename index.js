@@ -15,6 +15,7 @@ app.use(express.static('public'));
 
 app.post('/api/signup', async (req, res) => {
   const { name, email } = req.body;
+  console.log('Request body:', req.body);
 
   if (!name || !email) {
     return res.status(400).json({ error: 'Name and email are required' });
@@ -29,8 +30,10 @@ app.post('/api/signup', async (req, res) => {
       throw error;
     }
 
+    console.log('Inserted data:', data);
     res.status(200).json({ message: 'User signed up successfully', data });
   } catch (error) {
+    console.error('Error:', error.message);
     res.status(500).json({ error: error.message });
   }
 });
@@ -38,5 +41,6 @@ app.post('/api/signup', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
 
 
